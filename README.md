@@ -3,6 +3,9 @@ Web scrapes information from My Anime List in python, then stores the data in SQ
 
 ===WORK STILL IN PROGRESS===
 
+Program works by using MALTopScrape(), or by calling MALPageScrape(url) for a single page.
+
+
 TODO:
 
 *Rescrape everything, but without the arbitrary bounds
