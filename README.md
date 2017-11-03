@@ -4,16 +4,17 @@ Web scrapes information from My Anime List in python, then stores the data in SQ
 ===WORK STILL IN PROGRESS===
 
 TODO:
-*Investigate sporadic failures
-  *With no changes to the code, it sometimes fails to get the URL. MAL might be onto this being a bot.
 
 *Rescrape everything, but without the arbitrary bounds
   *Before doing this, see if any additional data fields are desired
   *Optional: get score of prequel series for use in the regresion
+  
+*Investigate sporadic failures
+  *With no changes to the code, it sometimes fails to get the URL. MAL might be onto this being a bot.
 
 *Edit MALTopScrape to accept custom ranges, but with defaults
 
-*Get data into SQL
+*Add SQL functionality
 
 *Visualize results of pivot tables
   Optional: use Tableau or Jupyter
