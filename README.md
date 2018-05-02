@@ -1,5 +1,5 @@
 # mal-scraper
-Web scrapes information from My Anime List in python, then stores the data in SQL (and Excel), then performs analysis in SQL, Excel, and R
+Web scrapes information from My Anime List in python, then outputs the results into Excel
 
 ===WORK STILL IN PROGRESS===
 
@@ -8,25 +8,15 @@ Program works by using MALTopScrape(), or by calling MALPageScrape(url) for a si
 
 TODO:
 
-*Rescrape everything, but without the arbitrary bounds
-  *Before doing this, see if any additional data fields are desired
-  *Optional: get score of prequel series for use in the regresion
-  
-*Investigate sporadic failures
-  *With no changes to the code, it sometimes fails to get the URL. MAL might be onto this being a bot.
-
 *Edit MALTopScrape to accept custom ranges, but with defaults
-
 *Add SQL functionality
-
 *Visualize results of pivot tables
   Optional: use Tableau or Jupyter
-
 *Get data into R
 *Perform machine learning / regression analysis on data in R
   *KNN, OLS for predicting score + popularity without using the other
   *Multiple Least Squares for predicting both at the same time
-  
-*Put results into PPT of no more than 7 slides
-  (Any more counts as death by PPT)
+*Put results Tableau for visualization
+*multi-thread the scraping process (file takes ~8 hrs to run)
+*clean everything. This will always be a thing to do.
  
