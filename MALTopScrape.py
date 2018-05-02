@@ -11,24 +11,23 @@ import csv
 from bs4 import BeautifulSoup as bsoup
 from MALPageScrape import MALPageScrape as scrape
 
-#TODO: put this in a class-like structure for calling by other programs
-#TODO: make sure this works
 
 # this times 50 = top x shows to be considered
 class MALTopScrape:
     def __init__(self):
-        with open("MALtext2.csv", "wb") as f:
+        with open("animedata4.csv", "wb") as f:
             writer = csv.writer(f)
             #Put in a header row
             writer.writerow(['Title', 'Type', 'Eps', 'Season', 'Year', 'Day', 'Timeslot', 'Source','Runtime', 'Rating',
-                            'Score', 'Popularity', 'Sequel Score', 'Sequel Popularity', 'Studio', 'Genres', 'Producers', 'Licensors'])
+                            'Score', 'Popularity', 'Sequel Score', 'Sequel Popularity', 'Source Url', 'Source Type',
+                            'Source Score', 'Source Pop', 'Directors', 'Main VAs', 'Studio', 'Genres', 'Producers', 'Licensors'])
             
             
-            for z in range(0, 1):
+            for z in range(0, 75):
+                print "working on page: " + str(z)
                 base_url = 'https://myanimelist.net/topanime.php?type=tv'
                 search_url = base_url + '&limit=' + str(z * 50)
-                response = requests.get(search_url, headers={
-                            "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"}).content
+                response = requests.get(search_url).content
                             
                 
                 #parse the results
@@ -47,20 +46,36 @@ class MALTopScrape:
                     check = check.get_text()
                     check = check.split('\n')
                     
-                    year = check[2]
-                    year = year.split('-')[0]
-                    year = year.strip(' ')
-                    year = year[4:] 
+                    target = check[2]
+                    target = "".join(_ for _ in target if _ in "1234567890")
                     
-                    popularity = check[3]
-                    popularity = popularity.replace(' members', '')
-                    popularity = popularity.replace(',', '')
+                    
+                    year = target[:4]
+                    popularity = target [8:]
+                    
+                    #print year
+                    #print popularity
+                    
+                    #old method that worked circa October 2017, but no longer does
+                    #year = check[2]
+                    #year = year.split('-')[0]
+                    #year = year.strip(' ')
+                    #year = year[4:] 
+                    
+                    #popularity = check[3]
+                    #popularity = popularity.replace(' members', '')
+                    #popularity = popularity.replace(',', '')
     
-                    if int(popularity) >= 10000 and year >= '2000':
-                        url_list.append(row.get('href'))
+                    try:
+                        if int(popularity) >= 3000 and year >= '1995':
+                            url_list.append(row.get('href'))
+                    except:
+                        pass
                     
                 #scrape each of the urls and write to file
                 for i in range(0, len(url_list)):
+                    #print(url_list[i])
+                    #print(type(url_list[i]))
                     x = scrape(url_list[i])
                     row = [s.encode('utf-8') for s in x.master_list]
                     if row != ['']:
